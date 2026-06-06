@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laundry Express - Preview Composite</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f0f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 560px;
+    background: #fff;
+    border-radius: 36px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.08);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Notch */
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 28px;
+    background: #0f0f0e;
+    border-radius: 0 0 18px 18px;
+    z-index: 10;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f9f9fc;
+  }
+
+  /* ── SCREEN 1: HOME ── */
+  .s1-header {
+    background: #eeeef0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    margin-top: 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .s1-header h1 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0040a1;
+  }
+
+  .s1-hero {
+    background: linear-gradient(180deg, rgba(218,226,255,0.5) 0%, rgba(249,249,252,1) 100%);
+    padding: 20px 16px 16px;
+    text-align: center;
+  }
+
+  .s1-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #dae2ff;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,86,210,0.15);
+    overflow: hidden;
+  }
+
+  .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .s1-hero h2 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1c1e;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .s1-hero p {
+    font-size: 11px;
+    color: #424654;
+    line-height: 1.5;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .s1-value {
+    margin: 12px 16px;
+    background: #f3f3f6;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid rgba(195,198,214,0.3);
+  }
+
+  .s1-value h3 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1c1e;
+    margin-bottom: 10px;
+  }
+
+  .s1-value-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .s1-value-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .s1-value-label { font-size: 12px; font-weight: 500; color: #1a1c1e; }
+
+  .s1-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0 16px 12px;
+  }
+
+  .s1-service-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid rgba(195,198,214,0.4);
+  }
+
+  .s1-service-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .s1-service-card h4 { font-size: 12px; font-weight: 700; color: #1a1c1e; }
+  .s1-service-card p { font-size: 10px; color: #424654; margin-top: 2px; line-height: 1.3; }
+
+  /* ── SCREEN 2: PROCESS ── */
+  .s2-hero-card {
+    margin: 12px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,86,210,0.06);
+  }
+
+  .s2-img-placeholder {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, #dae2ff, #b2c5ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+
+  .s2-hero-body { padding: 12px; }
+  .s2-hero-body h2 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0040a1;
+    margin-bottom: 4px;
+  }
+
+  .s2-divider {
+    width: 32px;
+    height: 3px;
+    background: #56f5f8;
+    border-radius: 99px;
+    margin: 6px 0 8px;
+  }
+
+  .s2-hero-body p { font-size: 10px; color: #424654; line-height: 1.5; }
+
+  .s2-steps { padding: 0 12px; }
+
+  .s2-steps-title {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1c1e;
+    margin-bottom: 12px;
+  }
+
+  .s2-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .s2-step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .s2-step-content h4 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .s2-step-content p { font-size: 10px; color: #424654; line-height: 1.4; }
+
+  .s2-step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: #f3f3f6;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #424654;
+    margin-top: 4px;
+  }
+
+  /* ── SCREEN 3: REGISTER ── */
+  .s3-hero {
+    background: linear-gradient(180deg, rgba(218,226,255,0.5) 0%, #f9f9fc 100%);
+    padding: 20px 16px 16px;
+    text-align: center;
+  }
+
+  .s3-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: #fff;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,86,210,0.1);
+    border: 2px solid #fff;
+    overflow: hidden;
+    transform: rotate(2deg);
+  }
+
+  .s3-logo img { width: 90%; height: 90%; object-fit: contain; }
+
+  .s3-hero h2 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1c1e;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .s3-hero p { font-size: 11px; color: #424654; line-height: 1.5; }
+
+  .s3-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #424654;
+    font-weight: 600;
+    padding: 0 16px;
+    margin: 8px 0 12px;
+    display: block;
+  }
+
+  .s3-reg-cards { padding: 0 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  .s3-reg-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(195,198,214,0.5);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .s3-reg-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .s3-reg-card-content { flex: 1; }
+  .s3-reg-card-content span {
+    display: block;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0040a1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .s3-reg-card-content p { font-size: 10px; color: #424654; margin-top: 1px; }
+  .s3-chevron { font-size: 16px; color: #737785; }
+
+  /* Bottom nav shared */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #e8e8ea;
+    border-top: 1px solid rgba(195,198,214,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .nav-icon {
+    width: 48px;
+    height: 24px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .nav-icon.active {
+    background: #0056d2;
+    color: #fff;
+  }
+
+  .nav-item span:last-child { font-size: 9px; color: #424654; font-weight: 500; }
+  .nav-item .active-label { font-weight: 700; color: #1a1c1e; }
+
+  /* Label strip */
+  .screen-label {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b6860;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Phone 1: Home Screen -->
+  <div>
+    <div class="phone-frame">
+      <div class="screen">
+        <!-- Header -->
+        <div class="s1-header">
+          <h1>Laundry Express</h1>
+        </div>
+
+        <!-- Hero -->
+        <div class="s1-hero">
+          <div class="s1-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSNaXgLpwsxwhiU2wvBGi0mVSk61Gq0u1LKubbB3qeDrD5hvwGQI_hVPQyy9wLFgTVso642l4KLDQ_8rXrxq30S0YumACNfw38Z8dEHg-gXXbEF7Du-U5_Gb3ItjSyA0jhT1Z0c8D4_9evmoTqzSwmTNuBOQuFCzdUa_NZwKb2O3pn3sVbwpEZyE8ra1J0ceSbBH1D2YV7MgYfwe4j2xkBDynus9qqszeq_VLoQKWkiBNoCL6jN6prnOSnGXQS_bo72Rh7PmGIXV0" alt="laundry" />
+          </div>
+          <h2>Cleanliness Redefined</h2>
+          <p>Premium door-to-door laundry services for modern life.</p>
+        </div>
+
+        <!-- Value props -->
+        <div class="s1-value">
+          <h3>Why Laundry Express?</h3>
+          <div class="s1-value-row">
+            <div class="s1-value-icon" style="background:#dae2ff;">🚚</div>
+            <span class="s1-value-label">Free Pick Up &amp; Delivery</span>
+          </div>
+          <div class="s1-value-row">
+            <div class="s1-value-icon" style="background:#56f5f8;">💳</div>
+            <span class="s1-value-label">Transparent Pricing</span>
+          </div>
+          <div class="s1-value-row" style="margin-bottom:0">
+            <div class="s1-value-icon" style="background:#dce3eb;">⭐</div>
+            <span class="s1-value-label">5-Star Cleaning Guarantee</span>
+          </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="s1-grid">
+          <div class="s1-service-card">
+            <div class="s1-service-icon" style="background:#dae2ff;">👔</div>
+            <h4>Dry Cleaning</h4>
+            <p>Delicate fabric care.</p>
+          </div>
+          <div class="s1-service-card">
+            <div class="s1-service-icon" style="background:#56f5f8;">👕</div>
+            <h4>Wash &amp; Fold</h4>
+            <p>Fresh folded wear.</p>
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <div class="nav-icon active">🏠</div>
+            <span class="active-label">Home</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">👕</div>
+            <span>Services</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">🚀</div>
+            <span>Start</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-label">Home</p>
+  </div>
+
+  <!-- Phone 2: How it Works -->
+  <div>
+    <div class="phone-frame">
+      <div class="screen">
+        <!-- Header -->
+        <div class="s1-header">
+          <h1>Laundry Express</h1>
+        </div>
+
+        <!-- About card -->
+        <div class="s2-hero-card">
+          <div class="s2-img-placeholder">🧺</div>
+          <div class="s2-hero-body">
+            <h2>About Us</h2>
+            <div class="s2-divider"></div>
+            <p>Your one-stop solution for all laundry needs. Easy, convenient, and hassle-free.</p>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="s2-steps">
+          <h3 class="s2-steps-title">How it Works?</h3>
+
+          <div class="s2-step">
+            <div class="s2-step-num" style="background:#0040a1;">1</div>
+            <div class="s2-step-content">
+              <h4 style="color:#0040a1;">Schedule a Pick-up</h4>
+              <p>Choose a convenient date &amp; time for pickup.</p>
+              <span class="s2-step-badge">📅 Step 1: Schedule</span>
+            </div>
+          </div>
+
+          <div class="s2-step">
+            <div class="s2-step-num" style="background:#00696b;">2</div>
+            <div class="s2-step-content">
+              <h4 style="color:#00696b;">Select Services</h4>
+              <p>Choose from available laundry services.</p>
+              <span class="s2-step-badge">👕 Step 2: Services</span>
+            </div>
+          </div>
+
+          <div class="s2-step" style="margin-bottom:0">
+            <div class="s2-step-num" style="background:#0056d2;">3</div>
+            <div class="s2-step-content">
+              <h4 style="color:#0056d2;">Delivery</h4>
+              <p>Get your clean laundry delivered back to you.</p>
+              <span class="s2-step-badge">🛵 Step 3: Handover</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <div class="bottom-nav" style="position:absolute;">
+          <div class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon active">👕</div>
+            <span class="active-label">Services</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">🚀</div>
+            <span>Start</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-label">Services</p>
+  </div>
+
+  <!-- Phone 3: Register -->
+  <div>
+    <div class="phone-frame">
+      <div class="screen">
+        <!-- Header -->
+        <div class="s1-header">
+          <h1>Laundry Express</h1>
+        </div>
+
+        <!-- Hero -->
+        <div class="s3-hero">
+          <div class="s3-logo">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDe24LTHsvdzul-DCdRZbk-wCk5Xs8EfiXTD0i9coUi3GI6aTsfXqVnfRH8QmJghXon8-6SDbSXBPbhm_RHrqa_64XLYaz4GVMxRIxN7IcdZyGPuVWMb0SORxNFVZoOZAzD0UAyZdoBTZZZWjjmhvqWfKw1MXHA6MZW2xbbCBnWoY60R9W_FrKi30iCGA7KiPxy1_nqkHitkPpuiaazSF-c1L2rjsblkvEP1IgM6mBwSxh0yDUzWpAwipltLtTVaBpHY6T0VFdWlo" alt="logo" />
+          </div>
+          <h2>Join the Family</h2>
+          <p>Choose how you want to experience Laundry Express today.</p>
+        </div>
+
+        <span class="s3-label">Register as</span>
+
+        <div class="s3-reg-cards">
+          <div class="s3-reg-card">
+            <div class="s3-reg-icon" style="background:#dae2ff;">🏪</div>
+            <div class="s3-reg-card-content">
+              <span>Partner</span>
+              <p>Own a laundry? Scale your business.</p>
+            </div>
+            <span class="s3-chevron">›</span>
+          </div>
+          <div class="s3-reg-card">
+            <div class="s3-reg-icon" style="background:#56f5f8;">👤</div>
+            <div class="s3-reg-card-content">
+              <span>Customer</span>
+              <p>Get your laundry done effortlessly.</p>
+            </div>
+            <span class="s3-chevron">›</span>
+          </div>
+          <div class="s3-reg-card">
+            <div class="s3-reg-icon" style="background:#dce3eb;">🛵</div>
+            <div class="s3-reg-card-content">
+              <span>Rider</span>
+              <p>Earn money by delivering clothes.</p>
+            </div>
+            <span class="s3-chevron">›</span>
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">👕</div>
+            <span>Services</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon active">⚙️</div>
+            <span class="active-label">Start</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="screen-label">Register</p>
+  </div>
+
+</body>
+</html>
