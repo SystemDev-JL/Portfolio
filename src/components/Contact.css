@@ -57,7 +57,7 @@
   resize: none;
 }
 
-.contact__input::placeholder { color: var(--ink-100); }
+.contact__input::placeholder { color: var(--ink-300); }
 
 .contact__input:focus {
   border-color: var(--border-mid);
