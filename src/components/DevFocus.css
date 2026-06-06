@@ -1,0 +1,98 @@
+.devfocus { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.devfocus__header { margin-bottom: 64px; }
+
+.devfocus__body {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 60px;
+  align-items: start;
+}
+
+.devfocus__list { display: flex; flex-direction: column; }
+
+.devfocus__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.devfocus__item:first-child { border-top: 1px solid var(--border); }
+.devfocus__item:hover { padding-left: 12px; }
+.devfocus__item:hover .devfocus__item-arrow { opacity: 1; transform: translateX(0); }
+.devfocus__item:hover .devfocus__item-num { color: var(--ink-700); }
+
+.devfocus__item-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-100);
+  width: 28px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.devfocus__item-content { flex: 1; }
+
+.devfocus__item-title { font-size: 15px; font-weight: 600; color: var(--ink-900); margin-bottom: 2px; }
+.devfocus__item-desc { font-size: 13px; color: var(--ink-500); line-height: 1.5; }
+
+.devfocus__item-arrow {
+  color: var(--ink-300);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* CTA Box */
+.devfocus__cta-box {
+  padding: 32px 28px;
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.devfocus__cta-orb { display: none; }
+
+.devfocus__cta-title { font-size: 22px; font-weight: 700; color: var(--ink-900); line-height: 1.25; }
+.devfocus__cta-desc { font-size: 14px; color: var(--ink-500); line-height: 1.7; }
+
+.devfocus__cta-stats {
+  display: flex;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.devfocus__cta-stat { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+.devfocus__cta-stat-num {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ink-900);
+  letter-spacing: -0.02em;
+}
+
+.devfocus__cta-stat-label {
+  font-size: 10px;
+  color: var(--ink-300);
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 1024px) {
+  .devfocus__body { grid-template-columns: 1fr; }
+  .devfocus__cta-box { position: static; }
+}
