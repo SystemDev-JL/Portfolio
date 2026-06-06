@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Contact() {
   const sectionRef = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -40,13 +40,34 @@ export default function Contact() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // ← Integrate with your email service (EmailJS, Formspree, etc.)
-    console.log('Form submitted:', form);
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: '', email: '', subject: '', message: '' });
+    setStatus('sending');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'bf7ceb24-b087-4574-bf0f-966eda842cef',
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus('sent');
+        setForm({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 4000);
+      }
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -116,8 +137,15 @@ export default function Contact() {
                   required
                 />
               </div>
-              <button type="submit" className={`btn-primary contact__submit ${sent ? 'contact__submit--sent' : ''}`}>
-                {sent ? '✓ Message Sent!' : <><FiSend size={15} /> Send Message</>}
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''} ${status === 'error' ? 'contact__submit--error' : ''}`}
+              >
+                {status === 'sending' && 'Sending...'}
+                {status === 'sent' && '✓ Message Sent!'}
+                {status === 'error' && '✗ Failed, try again'}
+                {status === 'idle' && <><FiSend size={15} /> Send Message</>}
               </button>
             </form>
           </div>
