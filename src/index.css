@@ -61,6 +61,12 @@ html.dark {
 html { scroll-behavior: smooth; color-scheme: light; }
 html.dark { color-scheme: dark; }
 
+/* Dark mode: invert button text so it stays readable against light bg */
+html.dark .btn-primary,
+html.dark .projects__filter-btn--active {
+  color: #1c1c1a;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
