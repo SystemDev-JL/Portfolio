@@ -2,12 +2,18 @@
 .projects__header { margin-bottom: 48px; }
 
 /* Filters */
-.projects__filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.projects__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+  row-gap: 10px;
+}
 
 .projects__filter-btn {
-  padding: 7px 18px;
-  border-radius: 6px;
-  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
   border: 1px solid var(--border-mid);
@@ -15,6 +21,7 @@
   color: var(--ink-500);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .projects__filter-btn:hover { border-color: var(--ink-700); color: var(--ink-900); }

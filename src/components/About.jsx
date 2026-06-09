@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiCode, FiSettings, FiDatabase } from 'react-icons/fi';
+import { FiCode, FiSettings, FiDatabase, FiLayout } from 'react-icons/fi';
 import './About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -21,6 +21,11 @@ const highlights = [
     icon: <FiDatabase size={20} />,
     title: 'Database & Backend Solutions',
     desc: 'Designing robust backend architectures with Laravel, Node.js, MySQL, Firebase, and Supabase.',
+  },
+  {
+    icon: <FiLayout size={20} />,
+    title: 'WordPress & GHL (GoHighLevel)',
+    desc: 'Building and customizing WordPress sites and GoHighLevel funnels, automations, and CRM pipelines for businesses.',
   },
 ];
 
@@ -79,6 +84,7 @@ export default function About() {
                 'Web Applications', 'Mobile Applications', 'Management Systems',
                 'Booking Systems', 'Payroll Systems', 'Loan Systems',
                 'IoT / Arduino', 'Admin Dashboards', 'Business Automation', 'Database Platforms',
+                'WordPress', 'GoHighLevel (GHL)', 'Funnel Building', 'CRM Automation',
               ].map(tag => (
                 <span key={tag} className="about__tag">{tag}</span>
               ))}

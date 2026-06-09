@@ -160,4 +160,4 @@ export const projects = [
   },
 ];
 
-export const filterCategories = ['All', 'Web App', 'Mobile App', 'Management System', 'Booking', 'Finance'];
+export const filterCategories = ['All', 'Web App', 'Mobile App', 'Management System', 'Booking', 'Finance', 'WordPress', 'GHL'];
