@@ -24,7 +24,7 @@
   white-space: nowrap;
 }
 
-.projects__filter-btn:hover { border-color: var(--ink-700); color: var(--ink-900); }
+.projects__filter-btn:hover { border-color: var(--ink-700); color: #000; }
 
 .projects__filter-btn--active {
   background: var(--ink-900);
